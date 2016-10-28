@@ -18,39 +18,52 @@ int main(int argc, char const *argv[]){
 			int cantidadDias=1;
 			int meses[] = {31,28,31,30,31,30,31,31,30,31,30,31};
  
-			for(int i=anio; i<final; i++){
+			for(int i=anio; i<=final; i++){
 				for(int j=0;j<12;j++){
-					if(i>1900){
+					if(i>1901){
 						if(cantidadDias%7==0){
 							domingos++;
 						}
 					}
 					int dias=0;
-					if(j!=1 || i%4!=0 || (i%100==0 && i%400!=0)){
+					if(j!=1 || i%4!=0 || (i%100==0 && i%400!=0)){ // comparando meses y el año divisible entre 4 y 400
 						dias= meses[j];
 					}
 					else{ // febrero
 						dias = 29;
-						//cout<<i << " bisiesto"<<endl;
 					}
 					cantidadDias += dias;
 				}
 			} //fin for
-			cout<<"Hay "<<domingos<<" domingos"<<endl;
+			cout<<"Hay "<<domingos+1 <<" domingos"<<endl;
 			
 		} // fin if 
 
 		if (opcion==2){
-			int gradoAlto;
+			int gradoAlto,contador=0;
 			cout<<"-------------- EJERCICIO 2 --------------"<<endl;
 			cout<<"Ingrese el grado mas alto del polinomio: "<<endl;
 			cin>>gradoAlto;
-			crearMatriz(gradoAlto);
-			for (int i = 0; i < gradoAlto; ++i){
-				
+
+			int** matriz = new int*[3];
+			
+			for(int i=0;i<gradoAlto;i++){
+				matriz[i]=new int[gradoAlto];
+			}
+			for(int i=gradoAlto; i>=0; i--){
+				cout<<"Polinomio de grado x^"<<i<<":";
+				cin>> matriz[0][contador];
+				contador++;
 			}
 
+			//efectuarDivision(matriz, tamanio);
+			//crearMatriz(matriz,gradoAlto);
+
 		}// fin if2
+
+		if (opcion==3){
+			
+		}
 
 	}// fin while
 
