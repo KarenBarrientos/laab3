@@ -1,8 +1,8 @@
 #include <iostream>
-#include <string>
-#include <iomanip>
 
-using namespace std;
+using std::cin;
+using std::cout;
+using std::endl;
 
 void imprimir(int**,int,int);
 
@@ -14,8 +14,7 @@ int main(int argc, char const *argv[]){
 		cout <<"***** MENU ***** "<< endl 
          << "1. Ejercicio1" << endl
          << "2. Ejercicio2" << endl
-         << "3. Ejercicio3" << endl
-         << "4. Salir" << endl;
+         << "3. Ejercicio3" << endl;
          cin >> opcion;
 
 		if (opcion == 1){
