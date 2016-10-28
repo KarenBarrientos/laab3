@@ -4,7 +4,6 @@
 
 using namespace std;
 
-int menu();
 void impresion(int***,int,int);
 
 int main(int argc, char const *argv[]){
@@ -83,8 +82,9 @@ int main(int argc, char const *argv[]){
 					}
 				}
 			}
-			cout<<endl<<"Residuo= "<<matriz[0][2][gradoAlto];
+
 			impresion(matriz,a,gradoAlto);
+
 			for(int i = 0;i<gradoAlto;i++){
 				for(int j = 0;j < 3;j++){
 					delete[] matriz[i][j];
@@ -107,7 +107,7 @@ int main(int argc, char const *argv[]){
 		cout<<"Desea Continuar[s/n]: ";
 		cin>>continuar;
 
-	}while(opcion = menu() != 4 && continuar == 's'||continuar == 'S');
+	}while(continuar == 's'||continuar == 'S');
 
 	return 0;
 }
@@ -120,6 +120,7 @@ void impresion(int*** matrix,int a,int grado){
 			for(int k = 0;k<grado+1;k++){
 				cout<<setfill(' ')<<setw(4)<<matrix[i][j][k];
 			}
+			
 			if(j== 0){
 				cout<<"|"<<a;
 			}
