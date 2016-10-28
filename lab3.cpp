@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -11,33 +12,32 @@ int main(int argc, char const *argv[]){
 	while ( (opcion = menu()) != 4){
 
 		if (opcion == 1){
-			int[] meses={31,0,31,30,31,30,31,31,30,31,30,31};
-			int anio=1901, domingos=0;
-			int CantidadMeses=0,CantidadDias=0;
-
-			for (int i = 1; i <= 7; ++i){ 
-				if (anio > 2000){
-					cout<<domingos;
-					return;
-				}
-
-				if (i == 1){ // para febrero
-					if (anio%4 == 0 && anio%100 !=0){
-						meses[1]=29;
-					}
-					if (anio%4 == 0 && anio%100 == 0){
-						meses[1]=28;
-					}
-					if (anio%4 != 0 && anio%400 !=0){
-						meses[1]=28;
-					}
-				}
-
-
-
-			}// fin for
-			
+			int anio=1901;
+			int final = 2000;
+			int domingos = 0;
+			int cantidadDias=1;
+			int meses[] = {31,28,31,30,31,30,31,31,30,31,30,31};
  
+			for(int i=anio; i<final; i++){
+				for(int j=0;j<12;j++){
+					if(i>1900){
+						if(cantidadDias%7==0){
+							domingos++;
+						}
+					}
+					int dias=0;
+					if(j!=1 || i%4!=0 || (i%100==0 && i%400!=0)){
+						dias= meses[j];
+					}
+					else{ // febrero
+						dias = 29;
+						//cout<<i << " bisiesto"<<endl;
+					}
+					cantidadDias += dias;
+				}
+			} //fin for
+			cout<<"Hay "<<domingos<<" domingos"<<endl;
+			
 		} // fin if 
 
 		if (opcion==2){
