@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void impresion(int***,int,int);
+void imprimir(int**,int,int);
 
 int main(int argc, char const *argv[]){
 	int opcion;
@@ -53,46 +53,42 @@ int main(int argc, char const *argv[]){
 			cout<<"Ingrese el grado mas alto del polinomio: "<<endl;
 			cin>>gradoAlto;
 
-			int*** matriz = new int**[gradoAlto+1];
-			for(int i = 0;i<gradoAlto+1;i++){
-				matriz[i] = new int*[3];
-				for(int j = 0;j < 3;j++){
-					matriz[i][j] = new int[gradoAlto+1];
-				}
-			}
-			for(int i = gradoAlto;i>=0;i--){
-				cout<<"Ingrese el polinomio de grado x^"<<i<<": ";
-				cin>>polinomio;
-				matriz[0][0][contador] = polinomio;
-				contador++;
-			}
-			cout<<"Ingrese a: ";
+			int** matriz = new int*[3];			
+ 			for(int i=0;i<gradoAlto;i++){
+ 				matriz[i]=new int[gradoAlto];
+ 			}
+ 			for(int i=gradoAlto; i>=0; i--){
+				cout<<"Polinomio de grado x^"<<i<<":";
+				cout<<"Ingrese el polinomio x^"<<i<<": ";
+ 				cin>> matriz[0][contador];
+ 				contador++;
+ 			}
+ 
+			cout<<"Ingrese a:";
 			cin>>a;
-
-			for(int i=0;i<gradoAlto;i++){
-				for(int j=0; j<2; j++){
-					if(j == 0){
-						matriz[i][1][0] = matriz[i][0][0];
-						matriz[i][2][0] = matriz[i][0][0];
-					}else{
-						for(int k = 1; k<=gradoAlto; k++){
-							matriz[i][j][k] = matriz[i][j+1][k-1] * a;
-							matriz[i][j+1][k] = matriz[i][j-1][k] + matriz[i][j][k];
-						}
+			
+			for(int i=0;i<2;i++){
+				if(i==0){
+					matriz[1][0]=matriz[0][0];
+					matriz[2][0]=matriz[0][0];
+					imprimir(matriz,a,gradoAlto);
+				}else{
+					for(int j=1;j<=gradoAlto;j++){
+						matriz[i][j]=matriz[i+1][j-1];
+						matriz[i+1][j]=matriz[i-1][j]+matriz[i][j];
+						imprimir(matriz,a,gradoAlto);
 					}
 				}
 			}
+			cout<<"El Residuo es :"<<matriz[2][gradoAlto]<<"\n";
 
-			impresion(matriz,a,gradoAlto);
+			imprimir(matriz,a,gradoAlto);
 
 			for(int i = 0;i<gradoAlto;i++){
-				for(int j = 0;j < 3;j++){
-					delete[] matriz[i][j];
-				}
-				delete[] matriz[i];
+					delete[] matriz[i];
 			}
 			delete[] matriz;
-
+			
 		}// fin if2
 
 		if (opcion==3){
@@ -112,20 +108,20 @@ int main(int argc, char const *argv[]){
 	return 0;
 }
 
-
-void impresion(int*** matrix,int a,int grado){
-	for(int i = 0;i< grado+1;i++){
-		cout<<setfill('-')<<setw(20);
-		for(int j = 0;j<3;j++ ){
-			for(int k = 0;k<grado+1;k++){
-				cout<<setfill(' ')<<setw(4)<<matrix[i][j][k];
-			}
-			
-			if(j== 0){
-				cout<<"|"<<a;
-			}
-			cout<<endl;
+void imprimir(int** matrix,int a,int grado){
+	for(int i=0;i<3;i++){
+		for(int j=0;j<grado+1;j++){
+			cout<<" "<<matrix[i][j];
 		}
-		cout<<endl;
+
+		if(i<2){
+			cout<<"| "<<a;
+		}
+
+		cout<<"\n";
+		if(i==2){
+			cout<<"------------------------ \n";
+		}
 	}
+	cout<<"\n";
 }
