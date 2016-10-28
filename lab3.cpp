@@ -5,7 +5,7 @@ using namespace std;
 
 int menu();
 int*** crearMatriz(int);
-
+void imprimir(int** matrix,int Dividiendo,int grado);
 
 int main(int argc, char const *argv[]){
 	int opcion;
@@ -41,20 +41,39 @@ int main(int argc, char const *argv[]){
 
 		if (opcion==2){
 			int gradoAlto,contador=0;
+			int a;
 			cout<<"-------------- EJERCICIO 2 --------------"<<endl;
 			cout<<"Ingrese el grado mas alto del polinomio: "<<endl;
 			cin>>gradoAlto;
 
 			int** matriz = new int*[3];
-			
+
 			for(int i=0;i<gradoAlto;i++){
 				matriz[i]=new int[gradoAlto];
 			}
 			for(int i=gradoAlto; i>=0; i--){
-				cout<<"Polinomio de grado x^"<<i<<":";
+				cout<<"Ingrese el polinomio x^"<<i<<": ";
 				cin>> matriz[0][contador];
 				contador++;
 			}
+
+			cout<<"Ingrese a:";
+			cin>>a;
+			
+			for(int i=0;i<2;i++){
+				if(i==0){
+					matriz[1][0]=matriz[0][0];
+					matriz[2][0]=matriz[0][0];
+					imprimir(matriz,a,gradoAlto);
+				}else{
+					for(int j=1;j<=gradoAlto;j++){
+						matriz[i][j]=matriz[i+1][j-1];
+						matriz[i+1][j]=matriz[i-1][j]+matriz[i][j];
+						imprimir(matriz,a,gradoAlto);
+					}
+				}
+			}
+			cout<<"El Residuo es :"<<matriz[2][gradoAlto]<<"\n";
 
 			//efectuarDivision(matriz, tamanio);
 			//crearMatriz(matriz,gradoAlto);
@@ -62,7 +81,12 @@ int main(int argc, char const *argv[]){
 		}// fin if2
 
 		if (opcion==3){
-			
+			int numero;
+			cout<<"Ingrese numero: "<<endl;
+			cin>>numero;
+
+			//int arreglo[];
+
 		}
 
 	}// fin while
@@ -99,4 +123,22 @@ int*** crearMatriz(int size){
 	}
 	return matriz;
 
+}
+
+void imprimir(int** matrix,int Dividiendo,int grado){
+	for(int i=0;i<3;i++){
+		for(int j=0;j<grado+1;j++){
+			cout<<" "<<matrix[i][j];
+		}
+		if(i<2){
+			cout<<"| "<<Dividiendo;
+		}
+			
+		cout<<"\n";
+		if(i==2){
+			cout<<"------------------------ \n";
+		}
+	}
+	cout<<"\n";
+	
 }
