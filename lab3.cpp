@@ -96,7 +96,7 @@ int main(int argc, char const *argv[]){
 			cout<<"Ingrese numero: "<<endl;
 			cin>>numero;
 
-			//int arreglo[];
+			cout<<"NO ME DIO TIEMPO :( "<<endl;
 
 		}
 
@@ -113,11 +113,9 @@ void imprimir(int** matrix,int a,int grado){
 		for(int j=0;j<grado+1;j++){
 			cout<<" "<<matrix[i][j];
 		}
-
 		if(i<2){
 			cout<<"| "<<a;
 		}
-
 		cout<<"\n";
 		if(i==2){
 			cout<<"------------------------ \n";
